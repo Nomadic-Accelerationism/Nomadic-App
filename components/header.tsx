@@ -119,7 +119,7 @@ export default function HeaderComponent() {
           </div>
 
           <Link className="w-full" href="/">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold">Home</h2>
               <Image 
                 src={"/home.png"} 
@@ -132,7 +132,7 @@ export default function HeaderComponent() {
           </Link>
 
           <Link className="w-full" href="/profile">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold">Profile</h2>
               <Image 
                 src={"/profile.png"} 
@@ -145,7 +145,7 @@ export default function HeaderComponent() {
           </Link>
 
           <Link className="w-full" href="/settings">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold mr-1">Settings</h2>
               <Image 
                 src={"/settings.png"} 
@@ -158,7 +158,7 @@ export default function HeaderComponent() {
           </Link>
 
           <Link className="w-full" href="/tokens">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold mr-2">$NACC Tokens</h2>
               <Image 
                 src={"/tokens.png"} 

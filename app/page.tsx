@@ -26,12 +26,10 @@ export default function Home() {
       <div className="">
         <HeaderComponent />
 
-
-
         <main className="flex flex-col items-center w-full max-w-md p-4 space-y-4 min-h-max">
 
           <Link className="w-full" href="/proof">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold">My zkProofs</h2>
               <Image 
                 src={"/zkProof.png"} 
@@ -44,7 +42,7 @@ export default function Home() {
           </Link>
 
           <Link className="w-full" href="/journey">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold">My Journeys</h2>
               <Image 
                 src={"/journeys.png"} 
@@ -57,7 +55,7 @@ export default function Home() {
           </Link>
 
           <Link className="w-full" href="/houses">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold mr-1">My Hacker Houses</h2>
               <Image 
                 src={"/houses.png"} 
@@ -70,7 +68,7 @@ export default function Home() {
           </Link>
 
           <Link className="w-full" href="/collateral">
-            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24 hover:bg-[#f26522]">
               <h2 className="text-xl font-bold">My Collateral</h2>
               <Image 
                 src={"/collateral.png"} 
