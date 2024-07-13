@@ -43,7 +43,6 @@ export default function Home() {
             </div>
           </Link>
 
-
           <Link className="w-full" href="/journey">
             <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
               <h2 className="text-xl font-bold">My Journeys</h2>

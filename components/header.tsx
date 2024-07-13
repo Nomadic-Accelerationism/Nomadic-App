@@ -118,37 +118,57 @@ export default function HeaderComponent() {
             <DynamicWidget variant='modal' />
           </div>
 
-          <Link
-            className="flex w-full items-center gap-2 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
-            href="/"
-          >
-            {/* <FolderIcon className="h-5 w-5" /> */}
-            Home
+          <Link className="w-full" href="/">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+              <h2 className="text-xl font-bold">Home</h2>
+              <Image 
+                src={"/home.png"} 
+                alt="Home" 
+                width={60}
+                height={60}
+                style={{ margin: 'auto' }}
+              />
+            </div>
           </Link>
 
-          <Link
-            className="flex w-full items-center gap-2 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
-            href="/profile"
-          >
-            {/* <SettingsIcon className="h-5 w-5" /> */}
-            Profile
+          <Link className="w-full" href="/profile">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+              <h2 className="text-xl font-bold">Profile</h2>
+              <Image 
+                src={"/profile.png"} 
+                alt="Profile" 
+                width={60}
+                height={60}
+                style={{ margin: 'auto' }}
+              />
+            </div>
           </Link>
 
-          <Link
-            className="flex w-full items-center gap-2 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
-            href="/settings"
-          >
-            {/* <SettingsIcon className="h-5 w-5" /> */}
-            Settings
+          <Link className="w-full" href="/settings">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+              <h2 className="text-xl font-bold mr-1">Settings</h2>
+              <Image 
+                src={"/settings.png"} 
+                alt="Settings" 
+                width={60}
+                height={60}
+                style={{ margin: 'auto' }}
+              />
+            </div>
           </Link>
 
-          <Link
-            className="flex w-full items-center gap-2 px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700"
-            href="/tokens"
-          >
-            {/* <SettingsIcon className="h-5 w-5" /> */}
-            $NACC Tokens
-          </Link>
+          <Link className="w-full" href="/tokens">
+            <div className="flex items-center justify-between w-full py-4 px-14 border rounded-md h-24">
+              <h2 className="text-xl font-bold mr-2">$NACC Tokens</h2>
+              <Image 
+                src={"/tokens.png"} 
+                alt="Tokens" 
+                width={60}
+                height={60}
+                style={{ margin: 'auto' }}
+              />
+            </div>
+          </Link>          
 
         </nav>
       </SheetContent>
