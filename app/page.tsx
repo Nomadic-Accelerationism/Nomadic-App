@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { DynamicContextProvider, DynamicWidget } from '@dynamic-labs/sdk-react-core';
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import HeaderComponent from "@/components/header";
 
 export default function Home() {
 
@@ -21,7 +22,9 @@ export default function Home() {
       </div>
     )}
     {isAuthenticated && (
-      <DynamicWidget />
+      <>
+        <HeaderComponent />
+      </>
     )}
     </>
   );
