@@ -27,7 +27,7 @@ export default function HeaderComponent() {
 
     <div></div>
 
-    <Link className="items-center gap-2 hidden lg:flex" href="/marketplace">
+    <Link className="items-center gap-2 hidden lg:flex" href="/">
       <Image src={"/nacc.png"} alt="nacc" 
             width={0}
             height={0}
@@ -36,7 +36,7 @@ export default function HeaderComponent() {
       />
     </Link>
 
-    <Link className="items-center gap-2 flex lg:hidden" href="/marketplace">
+    <Link className="items-center gap-2 flex lg:hidden" href="/">
       <Image src={"/nacc.png"} alt="nacc" 
             width={0}
             height={0}
