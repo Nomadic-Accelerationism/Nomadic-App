@@ -67,3 +67,9 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .dynamic-shadow-dom {
+    --dynamic-connect-button-background: #f26522;
+    --dynamic-connect-button-color: #070707;
+    --dynamic-text-primary: #070707;
+    }
