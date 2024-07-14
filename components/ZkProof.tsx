@@ -5,9 +5,16 @@ import { useState } from "react"
 // import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 export default function ZkProofComponent() {
   const [selectedImage, setSelectedImage] = useState(null)
+
+  const [patricioUpdated, setPatricioUpdated] = useState(false)
+
+  function updatePatricio() {
+    setPatricioUpdated(true)
+  }
 
   return (
     <div className="p-4">
@@ -52,24 +59,41 @@ export default function ZkProofComponent() {
               />
             </DialogTrigger>
 
-            {/* <DialogContent>
-              <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
-            </DialogContent> */}
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Patricio&apos;s Poap</DialogTitle>
+                </DialogHeader>
+                
+                {!patricioUpdated && (
+                <div>
+                    none
+                </div>                
+                )}
+                {patricioUpdated && (
+                <Badge variant="secondary" className="px-4 py-2 rounded-full">
+                    Generated
+                </Badge>            
+                )}
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
 
-                  <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
-                      <DialogHeader className="flex items-center justify-between w-full">
-                          <DialogTitle className="text-2xl font-bold">Patricio&apos;s Poap</DialogTitle>
-                      </DialogHeader>
-                      <DialogDescription className="text-lg text-muted-foreground">None</DialogDescription>
-                      <div className="flex items-center justify-center w-24 h-24 p-2 border rounded-md">
-                          <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
-                      </div>
-                      <p className="text-lg text-center text-muted-foreground">You have not met Patricio</p>
-                      <DialogFooter className="w-full">
-                          <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
-                      </DialogFooter>
-                  </DialogContent>
+                {!patricioUpdated && (
+                    <p className="text-lg text-center text-muted-foreground">You have not met Patricio</p>
+                )}
+                {patricioUpdated && (
+                    <>
+                        <p>You have met Patricio</p>
+                        <p className="text-2xl font-bold">4 times</p>
+                    </>
+                )}
+                </div>
 
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={updatePatricio}>Update</Button>
+                </DialogFooter>
+            </DialogContent>
           </Dialog>
 
           <Dialog>
