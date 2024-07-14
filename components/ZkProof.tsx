@@ -6,14 +6,57 @@ import { useState } from "react"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+
+
+// Define the structure of individual token objects
+interface Token {
+    event: {
+        id: string;
+    };
+    id: string;
+    owner: {
+        id: string;
+    };
+}
+
+// Define the structure of the API response
+interface TokenResponse {
+    tokens: Token[];
+    tokensCount: number;
+}
 
 export default function ZkProofComponent() {
   const [selectedImage, setSelectedImage] = useState(null)
-
   const [patricioUpdated, setPatricioUpdated] = useState(false)
+  const [error, setError] = useState<string | null>(null);
+  const [dataPatricio, setDataPatricio] = useState<TokenResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { primaryWallet } = useDynamicContext();
+  const endpoint = `http://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
+  //console.log(endpoint);
 
   function updatePatricio() {
-    setPatricioUpdated(true)
+    fetchData();
+  }
+
+  async function fetchData() {
+    try {
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+            //throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const responseData: TokenResponse = await response.json();
+        setDataPatricio(responseData);
+        setPatricioUpdated(true);
+        console.log(responseData);
+    } catch (error) {
+        console.log("error",error);
+        setPatricioUpdated(false);
+        //setError(error.message);
+    } finally {
+        setIsLoading(false);
+    }
   }
 
   return (
@@ -85,7 +128,7 @@ export default function ZkProofComponent() {
                 {patricioUpdated && (
                     <>
                         <p>You have met Patricio</p>
-                        <p className="text-2xl font-bold">4 times</p>
+                        <p className="text-2xl font-bold">{ dataPatricio?.tokensCount } times</p>
                     </>
                 )}
                 </div>
