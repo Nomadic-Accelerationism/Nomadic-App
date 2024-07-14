@@ -7,7 +7,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
-
+import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit'
 
 // Define the structure of individual token objects
 interface Token {
@@ -112,41 +112,51 @@ export default function ZkProofComponent() {
     }
   }
 
+  function onSuccess(result: any) {
+    console.log("onSuccess: ", result);
+  }
+
+  async function handleVerify(result: any) {
+    console.log("handleVerify: ", result);
+    const res = await fetch(`/api/worldCoinHandleVerification?proof=${result?.proof}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (res.ok) {
+        const result = await res.json();
+        console.log("result",result);
+    } else {
+        const error = await res.json();
+        console.log("error",error);
+    }    
+  }
+
   return (
     <div className="p-4">
       <h1 className="text-center text-2xl font-bold mb-4">My zkProofs</h1>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-6 mb-2">
 
-          <Dialog>
-            <DialogTrigger asChild>
-              <img
-                src="/worldcoin.png"
-                alt="worldCoin"
-                className="w-full h-auto rounded-lg cursor-pointer m-1"
-                onClick={() => setSelectedImage(1)}
-              />
-            </DialogTrigger>
-
-            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
-                <DialogHeader className="flex items-center justify-between w-full">
-                    <DialogTitle className="text-2xl font-bold">Worldcoin Poap</DialogTitle>
-                </DialogHeader>
-                <div>
-                    none
-                </div>
-                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
-                    <img src="/worldcoin.png" alt="Selected" className="w-full h-auto" />
-                </div>
-                <div className="text-center mb-4">
-                    <p className="text-lg text-center text-muted-foreground">You don&apos;t have Worldcoin verification yet.
-                    </p>
-                </div>
-                <DialogFooter className="w-full">
-                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={updatePatricio}>Update</Button>
-                </DialogFooter>
-            </DialogContent>
-
-          </Dialog>
+        <IDKitWidget
+            app_id="app_9a3569098c2172a03c9a32a46d3895f4" // obtained from the Developer Portal
+            action="connectprod" // obtained from the Developer Portal
+            onSuccess={onSuccess} // callback when the modal is closed
+            handleVerify={handleVerify} // callback when the proof is received
+            verification_level={VerificationLevel.Orb}
+        >
+            {({ open }) => 
+                // This is the button that will open the IDKit modal
+                <button className="w-full rounded-lg   " onClick={open}>
+                    <img
+                        src="/worldcoin.png"
+                        alt="worldCoin"
+                        className="w-full h-auto rounded-lg cursor-pointer m-1"
+                        onClick={() => setSelectedImage(1)}
+                    />
+                </button>
+            }
+        </IDKitWidget>             
 
           <Dialog>
             <DialogTrigger asChild>
