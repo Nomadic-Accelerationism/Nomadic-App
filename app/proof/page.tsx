@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/header";
+import ZkProofComponent from "@/components/ZkProof";
 
 
 export default function Proof() {
@@ -6,7 +7,7 @@ export default function Proof() {
     return (
         <>
             <HeaderComponent />
-            <h1>Proof</h1>
+            <ZkProofComponent />
         </>
     )
 
