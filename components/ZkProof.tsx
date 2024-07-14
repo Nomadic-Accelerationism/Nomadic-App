@@ -33,7 +33,7 @@ export default function ZkProofComponent() {
   const [dataPatricio, setDataPatricio] = useState<TokenResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { primaryWallet } = useDynamicContext();
-  const endpoint = `http://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
+  const endpoint = `https://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
   //console.log(endpoint);
 
   function updatePatricio() {
@@ -73,9 +73,26 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(1)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/worldcoin.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Worldcoin Poap</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/worldcoin.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You don&apos;t have Worldcoin verification yet.
+                    </p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={updatePatricio}>Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -87,9 +104,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(2)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/polygon-id.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Polygon ID</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/polygon-id.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You don&apos;t have Polygon ID verification yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -102,41 +135,40 @@ export default function ZkProofComponent() {
               />
             </DialogTrigger>
 
-            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
-                <DialogHeader className="flex items-center justify-between w-full">
-                    <DialogTitle className="text-2xl font-bold">Patricio&apos;s Poap</DialogTitle>
-                </DialogHeader>
-                
-                {!patricioUpdated && (
-                <div>
-                    none
-                </div>                
-                )}
-                {patricioUpdated && (
-                <Badge variant="secondary" className="px-4 py-2 rounded-full">
-                    Generated
-                </Badge>            
-                )}
-                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
-                    <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
-                </div>
-                <div className="text-center mb-4">
+                  <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                      <DialogHeader className="flex items-center justify-between w-full">
+                          <DialogTitle className="text-2xl font-bold">Patricio&apos;s Poap</DialogTitle>
+                      </DialogHeader>
 
-                {!patricioUpdated && (
-                    <p className="text-lg text-center text-muted-foreground">You have not met Patricio</p>
-                )}
-                {patricioUpdated && (
-                    <>
-                        <p>You have met Patricio</p>
-                        <p className="text-2xl font-bold">{ dataPatricio?.tokensCount } times</p>
-                    </>
-                )}
-                </div>
+                      {!patricioUpdated && (
+                          <div>
+                              none
+                          </div>
+                      )}
+                      {patricioUpdated && (
+                          <Badge variant="secondary" className="px-4 py-2 rounded-full">
+                              Generated
+                          </Badge>
+                      )}
+                      <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                          <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
+                      </div>
+                      <div className="text-center mb-4">
+                          {!patricioUpdated && (
+                              <p className="text-lg text-center text-muted-foreground">You have not met Patricio</p>
+                          )}
+                          {patricioUpdated && (
+                              <>
+                                  <p>You have met Patricio</p>
+                                  <p className="text-2xl font-bold">{dataPatricio?.tokensCount} times</p>
+                              </>
+                          )}
+                      </div>
+                      <DialogFooter className="w-full">
+                          <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={updatePatricio}>Update</Button>
+                      </DialogFooter>
+                  </DialogContent>
 
-                <DialogFooter className="w-full">
-                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={updatePatricio}>Update</Button>
-                </DialogFooter>
-            </DialogContent>
           </Dialog>
 
           <Dialog>
@@ -148,9 +180,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(4)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/nouns.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">$nouns Transactions</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/nouns.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You are not transacting with $nouns yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -162,9 +210,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(5)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/bored-ape.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Am I an Ape?</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/bored-ape.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You are not a verified Ape yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -176,9 +240,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(6)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/ape.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">ApeCoin Staking</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/ape.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You are not staking ApeCoin yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -190,9 +270,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(7)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/talent.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">TalentProtocol BuildScore</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/talent.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">Your current Talent Protocol Builder score is 0.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -204,9 +300,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(8)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/eth-global.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">ETH Global Hacker</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/eth-global.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You haven&apos;t sign with the ETH Global bracelet yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -218,9 +330,26 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(9)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/sex.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Gender</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/sex.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You haven&apos;t verify your gender yet
+                    .</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -232,9 +361,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(6)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/age.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Birthday</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/age.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You haven&apos;t verify your birthday yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -246,9 +391,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(7)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/farcaster.png" alt="Selected" className="w-full h-auto" />
+
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">Farcaster</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/farcaster.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You haven&apos;t connect your Farcaster account yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
             </DialogContent>
+
           </Dialog>
 
           <Dialog>
@@ -260,11 +421,26 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(8)}
               />
             </DialogTrigger>
-            <DialogContent>
-              <img src="/ens.png" alt="Selected" className="w-full h-auto" />
-            </DialogContent>
-          </Dialog>
 
+            <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                <DialogHeader className="flex items-center justify-between w-full">
+                    <DialogTitle className="text-2xl font-bold">ENS</DialogTitle>
+                </DialogHeader>
+                <div>
+                    none
+                </div>
+                <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
+                    <img src="/ens.png" alt="Selected" className="w-full h-auto" />
+                </div>
+                <div className="text-center mb-4">
+                    <p className="text-lg text-center text-muted-foreground">You haven&apost;t verify your primary ENS domain yet.</p>
+                </div>
+                <DialogFooter className="w-full">
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                </DialogFooter>
+            </DialogContent>
+
+          </Dialog>
 
       </div>
     </div>
