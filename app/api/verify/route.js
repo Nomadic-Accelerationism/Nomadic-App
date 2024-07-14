@@ -1,11 +1,9 @@
-import { type IVerifyResponse, verifyCloudProof } from '@worldcoin/idkit'
-import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
 	const proof = req.body;
-    const app_id = process.env.NEXT_PUBLIC_WORLDCOIN_APP_ID || "";
-    const action = process.env.NEXT_PUBLIC_WORLDCOIN_ACTION_ID;
-	const verifyRes = (await verifyCloudProof(proof, app_id, action)) as IVerifyResponse
+    const app_id = "app_9a3569098c2172a03c9a32a46d3895f4";
+    const action = "connectprod";
+	const verifyRes = (await verifyCloudProof(proof, app_id, action));
 
     if (verifyRes.success) {
         // This is where you should perform backend actions if the verification succeeds
