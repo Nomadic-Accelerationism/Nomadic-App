@@ -2,7 +2,9 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+// import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 export default function ZkProofComponent() {
   const [selectedImage, setSelectedImage] = useState(null)
@@ -49,9 +51,25 @@ export default function ZkProofComponent() {
                 onClick={() => setSelectedImage(3)}
               />
             </DialogTrigger>
-            <DialogContent>
+
+            {/* <DialogContent>
               <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
-            </DialogContent>
+            </DialogContent> */}
+
+                  <DialogContent className="flex flex-col items-center p-6 space-y-4 bg-white rounded-md shadow-lg">
+                      <DialogHeader className="flex items-center justify-between w-full">
+                          <DialogTitle className="text-2xl font-bold">Patricio&apos;s Poap</DialogTitle>
+                      </DialogHeader>
+                      <DialogDescription className="text-lg text-muted-foreground">None</DialogDescription>
+                      <div className="flex items-center justify-center w-24 h-24 p-2 border rounded-md">
+                          <img src="/patricio.png" alt="Selected" className="w-full h-auto" />
+                      </div>
+                      <p className="text-lg text-center text-muted-foreground">You have not met Patricio</p>
+                      <DialogFooter className="w-full">
+                          <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                      </DialogFooter>
+                  </DialogContent>
+
           </Dialog>
 
           <Dialog>
