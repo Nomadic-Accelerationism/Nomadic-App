@@ -25,67 +25,91 @@ interface TokenResponse {
     tokens: Token[];
     tokensCount: number;
 }
+interface NounsResponse {
+    wallet: string;
+    is_nouns_holder: number;
+}
+interface BoredApeResponse {
+    wallet: string;
+    is_ape_holder: number;
+}
 
 export default function ZkProofComponent() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [patricioUpdated, setPatricioUpdated] = useState(false)
+  const [nounsUpdated, setNounsUpdated] = useState(false)
+  const [boredApeUpdated, setBoredApeUpdated] = useState(false)
   const [error, setError] = useState<string | null>(null);
   const [dataPatricio, setDataPatricio] = useState<TokenResponse | null>(null);
+  const [dataNouns, setDataNouns] = useState<NounsResponse | null>(null);
+  const [dataBoredApe, setDataBoredApe] = useState<BoredApeResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { primaryWallet } = useDynamicContext();
-  //const endpoint = `https://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
-  //console.log(endpoint);
 
   function updatePatricio() {
     fetchData();
   }
 
   async function fetchData() {
-
     const res = await fetch(`/api/updateData?wallet=${primaryWallet?.address}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
     });
-
     if (res.ok) {
         const result = await res.json();
         console.log("result",result);
-        //setResponse(JSON.stringify(result, null, 2));
         setPatricioUpdated(true);
         setDataPatricio(result);
     } else {
         const error = await res.json();
         setPatricioUpdated(false);
         console.log("error",error);
-        //setResponse(JSON.stringify(error, null, 2));
     }
+  }
+  async function fetchNounsData() {
+    const res = await fetch(`/api/updateNouns?wallet=${primaryWallet?.address}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (res.ok) {
+        const result = await res.json();
+        console.log("result",result);
+        setNounsUpdated(true);
+        if (result.is_nouns_holder == 0) {
+            setNounsUpdated(false);
+        }
+        setDataNouns(result);
+    } else {
+        const error = await res.json();
+        setNounsUpdated(false);
+        console.log("error",error);
+    }
+  }
 
-    // try {
-    //     const response = await fetch(`/api/endpoint?parametro=${primaryWallet?.address}`);
-    //     const data = await response.json();
-    //     setDataPatricio(data);
-    //   } catch (error) {
-    //     console.error('Error:', error);
-    //   }
-
-    // try {
-    //     const response = await fetch(endpoint);
-    //     if (!response.ok) {
-    //         //throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-    //     const responseData: TokenResponse = await response.json();
-    //     setDataPatricio(responseData);
-    //     setPatricioUpdated(true);
-    //     console.log(responseData);
-    // } catch (error) {
-    //     console.log("error",error);
-    //     setPatricioUpdated(false);
-    //     //setError(error.message);
-    // } finally {
-    //     setIsLoading(false);
-    // }
+  async function fetchBoredApesData() {
+    const res = await fetch(`/api/updateBoredApes?wallet=${primaryWallet?.address}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (res.ok) {
+        const result = await res.json();
+        console.log("result",result);
+        setBoredApeUpdated(true);
+        if (result.is_nouns_holder == 0) {
+            setBoredApeUpdated(false);
+        }
+        setDataBoredApe(result);
+    } else {
+        const error = await res.json();
+        setBoredApeUpdated(false);
+        console.log("error",error);
+    }
   }
 
   return (
@@ -214,17 +238,33 @@ export default function ZkProofComponent() {
                 <DialogHeader className="flex items-center justify-between w-full">
                     <DialogTitle className="text-2xl font-bold">$nouns Transactions</DialogTitle>
                 </DialogHeader>
-                <div>
-                    none
-                </div>
+                {!nounsUpdated && (
+                          <div>
+                              none
+                          </div>
+                      )}
+                {nounsUpdated && (
+                          <Badge variant="secondary" className="px-4 py-2 rounded-full">
+                              Generated
+                          </Badge>
+                      )}
                 <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
                     <img src="/nouns.png" alt="Selected" className="w-full h-auto" />
                 </div>
                 <div className="text-center mb-4">
+
+                {!nounsUpdated && (
                     <p className="text-lg text-center text-muted-foreground">You are not transacting with $nouns yet.</p>
+                )}
+                {nounsUpdated && (
+                    <>
+                        <p>You hold $nouns</p>
+                        <p className="text-2xl font-bold">{dataNouns?.is_nouns_holder} times</p>
+                    </>
+                )}    
                 </div>
                 <DialogFooter className="w-full">
-                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={fetchNounsData}>Update</Button>
                 </DialogFooter>
             </DialogContent>
 
@@ -244,17 +284,37 @@ export default function ZkProofComponent() {
                 <DialogHeader className="flex items-center justify-between w-full">
                     <DialogTitle className="text-2xl font-bold">Am I an Ape?</DialogTitle>
                 </DialogHeader>
-                <div>
-                    none
-                </div>
+
+                {!boredApeUpdated && (
+                    <div>
+                        none
+                    </div>
+                )}
+                {boredApeUpdated && (
+                    <Badge variant="secondary" className="px-4 py-2 rounded-full">
+                        Generated
+                    </Badge>
+                )}
+                
                 <div className="flex items-center justify-center w-48 h-48 p-2 border rounded-md">
                     <img src="/bored-ape.png" alt="Selected" className="w-full h-auto" />
                 </div>
                 <div className="text-center mb-4">
-                    <p className="text-lg text-center text-muted-foreground">You are not a verified Ape yet.</p>
+
+
+                    {!nounsUpdated && (
+                        <p className="text-lg text-center text-muted-foreground">You are not a verified Ape yet.</p>
+                    )}
+                    {nounsUpdated && (
+                        <>
+                            <p>You hold apes</p>
+                            <p className="text-2xl font-bold">{dataBoredApe?.is_ape_holder} times</p>
+                        </>
+                    )}
+                
                 </div>
                 <DialogFooter className="w-full">
-                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2">Update</Button>
+                    <Button className="w-full bg-orange-500 text-white rounded-lg py-2" onClick={fetchBoredApesData}>Update</Button>
                 </DialogFooter>
             </DialogContent>
 
