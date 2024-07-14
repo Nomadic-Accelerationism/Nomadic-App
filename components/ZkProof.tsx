@@ -33,7 +33,7 @@ export default function ZkProofComponent() {
   const [dataPatricio, setDataPatricio] = useState<TokenResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { primaryWallet } = useDynamicContext();
-  const endpoint = `https://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
+  //const endpoint = `https://159.223.228.122/poaps?wallet=${primaryWallet?.address}`;
   //console.log(endpoint);
 
   function updatePatricio() {
@@ -41,22 +41,51 @@ export default function ZkProofComponent() {
   }
 
   async function fetchData() {
-    try {
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-            //throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const responseData: TokenResponse = await response.json();
-        setDataPatricio(responseData);
+
+    const res = await fetch(`/api/updateData?wallet=${primaryWallet?.address}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (res.ok) {
+        const result = await res.json();
+        console.log("result",result);
+        //setResponse(JSON.stringify(result, null, 2));
         setPatricioUpdated(true);
-        console.log(responseData);
-    } catch (error) {
-        console.log("error",error);
+        setDataPatricio(result);
+    } else {
+        const error = await res.json();
         setPatricioUpdated(false);
-        //setError(error.message);
-    } finally {
-        setIsLoading(false);
+        console.log("error",error);
+        //setResponse(JSON.stringify(error, null, 2));
     }
+
+    // try {
+    //     const response = await fetch(`/api/endpoint?parametro=${primaryWallet?.address}`);
+    //     const data = await response.json();
+    //     setDataPatricio(data);
+    //   } catch (error) {
+    //     console.error('Error:', error);
+    //   }
+
+    // try {
+    //     const response = await fetch(endpoint);
+    //     if (!response.ok) {
+    //         //throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+    //     const responseData: TokenResponse = await response.json();
+    //     setDataPatricio(responseData);
+    //     setPatricioUpdated(true);
+    //     console.log(responseData);
+    // } catch (error) {
+    //     console.log("error",error);
+    //     setPatricioUpdated(false);
+    //     //setError(error.message);
+    // } finally {
+    //     setIsLoading(false);
+    // }
   }
 
   return (
