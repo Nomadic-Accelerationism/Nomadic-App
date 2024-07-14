@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import Link from "next/link";
@@ -8,13 +9,20 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownM
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { DynamicContextProvider, DynamicNav, DynamicWidget } from '@dynamic-labs/sdk-react-core';
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 import { JSX, SVGProps } from "react";
 
 export default function HeaderComponent() {
 
-  
+  const { isAuthenticated } = useDynamicContext();
   const router = useRouter();
+  
+  useEffect(() => {
+    if (!isAuthenticated) {
+        router.push('/'); // Redirect to the home page
+    }
+}, [isAuthenticated, router]);
 
   const handleDisconnect = () => {
     // Handle the disconnect event here
